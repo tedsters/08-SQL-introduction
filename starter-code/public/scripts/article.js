@@ -40,20 +40,20 @@ Article.prototype.toHtml = function() {
 
 // ++++++++++++++++++++++++++++++++++++++
 
-// TODO
+// DONE
 /**
- * OVERVIEW of
- * - Describe what the method does
- * - Inputs: identify any inputs and their source
- * - Outputs: identify any outputs and their destination
+ * OVERVIEW of Article.loadAll();.
+ * - The method is being .
+ * - Inputs: a and b are the inputs and they are being used in the publishedOn or the dates that are stored in that instance of publishedOn.
+ * - Outputs: On line 53, the dates are then being subtracted from eachother which in turn will give you how many days will be inbetween those dates and push them out to be published.
  */
 Article.loadAll = function(rows) {
-  // TODO: describe what the following code is doing
+  // DONE: This code is subracting the two dates to give you the certain amount of time inbetween those two dates to actually give you how many days there are. Those two dates are then returned so you can input them into the publishedOn key value to be published onto the page in the future.
   rows.sort(function(a,b) {
     return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
   });
 
-  // TODO: describe what the following code is doing
+  // DONE: This piece of code it is running through a loop and inputting that information into the different key value pairs in the constructor function to get ready to publicate onto the page.
   rows.forEach(function(ele) {
     Article.all.push(new Article(ele));
   })
@@ -61,25 +61,25 @@ Article.loadAll = function(rows) {
 
 // ++++++++++++++++++++++++++++++++++++++
 
-// TODO
+// DONE
 /**
- * OVERVIEW of
- * - Describe what the method does
- * - Inputs: identify any inputs and their source
- * - Outputs: identify any outputs and their destination
+ * OVERVIEW of fetchAll methode
+ * - This methode is going to fetch information in the constructor function to get ready to put into the page.
+ * - Inputs: Article is the input and it is going to be what give the information to the function so that it can have stuff to load.
+ * - Outputs: The output is going to be the callback that is in the function called callback. It is going to be what stores all the information that is being fetched by this function.
  */
 Article.fetchAll = function(callback) {
-  // TODO: describe what the following code is doing
+  // DONE: This code is using AJAX and JSON to get information from this article.js file to use in the future.
   $.get('/articles')
-  // TODO: describe what the following code is doing
+  // DONE: .then adds handlers that does stuff when an defferd object is resolved, rejected, or still in progress which means when it it gets a response from a database it will do something with that information.
   .then(
     function(results) {
       if (results.length) { // If records exist in the DB
-        // TODO: describe what the following code is doing
+        // DONE: lodall is being called with the callback of results that has information that it needs to check. the callback is being called becuase it has not been called yet so it is not going to do anything until it runs this information.
         Article.loadAll(results);
         callback();
       } else { // if NO records exist in the DB
-        // TODO: describe what the following code is doing
+        // DONE: This piece of code is using AJAX/JSON to then pull or store records into said DB so that when this function is run again it can then just use the information to create what it needs to.
         $.getJSON('./data/hackerIpsum.json')
         .then(function(rawData) {
           rawData.forEach(function(item) {
@@ -87,7 +87,7 @@ Article.fetchAll = function(callback) {
             article.insertRecord(); // Add each record to the DB
           })
         })
-        // TODO: describe what the following code is doing
+        // DONE: This method is being called with the callback of callback.
         .then(function() {
           Article.fetchAll(callback);
         })
