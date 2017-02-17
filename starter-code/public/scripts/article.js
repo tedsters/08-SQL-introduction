@@ -91,7 +91,7 @@ Article.fetchAll = function(callback) {
         .then(function() {
           Article.fetchAll(callback);
         })
-        // TODO: describe what the following code is doing
+        // DONE: This is checking to see if SQL comes back with an error message and if it does it will set a console log to tell you what it is.
         .catch(function(err) {
           console.error(err);
         });
@@ -102,20 +102,20 @@ Article.fetchAll = function(callback) {
 
 // ++++++++++++++++++++++++++++++++++++++
 
-// TODO
+// DONE
 /**
  * OVERVIEW of
- * - Describe what the method does
- * - Inputs: identify any inputs and their source
- * - Outputs: identify any outputs and their destination
+ * - truncateTable deletes the table to make sure another table can render when deleted.
+ * - Inputs: Article is the inputs
+ * - Outputs: the output is the callback.
  */
 Article.truncateTable = function(callback) {
-  // TODO: describe what the following code is doing
+  // DONE: making an ajax call so that when it is called it can delete the tables.
   $.ajax({
     url: '/articles',
     method: 'DELETE',
   })
-  // TODO: describe what the following code is doing
+  // DONE: Running the then statement and if it gets no data or sees that there is no data in callback then it calls itself so it can input that information.
   .then(function(data) {
     console.log(data);
     if (callback) callback();
@@ -124,17 +124,17 @@ Article.truncateTable = function(callback) {
 
 // ++++++++++++++++++++++++++++++++++++++
 
-// TODO
+// DONE
 /**
  * OVERVIEW of
- * - Describe what the method does
- * - Inputs: identify any inputs and their source
- * - Outputs: identify any outputs and their destination
+ * - This prototype is inserting new data into the table.
+ * - Inputs: Article
+ * - Outputs: insertRecord
  */
 Article.prototype.insertRecord = function(callback) {
-  // TODO: describe what the following code is doing
+  // DONE: It is creating new data to put into the articles table.
   $.post('/articles', {author: this.author, authorUrl: this.authorUrl, body: this.body, category: this.category, publishedOn: this.publishedOn, title: this.title})
-  // TODO: describe what the following code is doing
+  // DONE: Running a then to check to see if data is done and checking it with an if statement so that it can run and call itself.
   .then(function(data) {
     console.log(data);
     if (callback) callback();
@@ -143,20 +143,20 @@ Article.prototype.insertRecord = function(callback) {
 
 // ++++++++++++++++++++++++++++++++++++++
 
-// TODO
+// DONE
 /**
  * OVERVIEW of
- * - Describe what the method does
- * - Inputs: identify any inputs and their source
- * - Outputs: identify any outputs and their destination
+ * - You are deleting information from your table.
+ * - Inputs: Articles.
+ * - Outputs: deleteRecord
  */
 Article.prototype.deleteRecord = function(callback) {
-  // TODO: describe what the following code is doing
+  // DONE: calling an ajax call to make sure when it is called it deletes everything in the article_id.
   $.ajax({
     url: `/articles/${this.article_id}`,
     method: 'DELETE'
   })
-  // TODO: describe what the following code is doing
+  // DONE: running a then statement to see if call back has been called yet and if it hasnt then it will call it.
   .then(function(data) {
     console.log(data);
     if (callback) callback();
@@ -165,19 +165,19 @@ Article.prototype.deleteRecord = function(callback) {
 
 // ++++++++++++++++++++++++++++++++++++++
 
-// TODO
+// DONE
 /**
- * OVERVIEW of
- * - Describe what the method does
- * - Inputs: identify any inputs and their source
- * - Outputs: identify any outputs and their destination
+ * OVERVIEW of updateRecord();
+ * - This methode updates the information that is inside of the table.
+ * - Inputs: articles
+ * - Outputs: updateRecord because it has what it is going to be doing when it is called.
  */
 Article.prototype.updateRecord = function(callback) {
-  // TODO: describe what the following code is doing
+  // DONE: AJAX call to input data into the table when called.
   $.ajax({
     url: `/articles/${this.article_id}`,
     method: 'PUT',
-    data: {  // TODO: describe what this object is doing
+    data: {  // DONE: These are the data types that are going to be put into the table.
       author: this.author,
       authorUrl: this.authorUrl,
       body: this.body,
@@ -186,7 +186,7 @@ Article.prototype.updateRecord = function(callback) {
       title: this.title
     }
   })
-  // TODO: describe what the following code is doing
+  // DONE: If it already has the information then just call itself to render the table.
   .then(function(data) {
     console.log(data);
     if (callback) callback();
